@@ -29,7 +29,8 @@ jobs:
         - cd $TRAVIS_BUILD_DIR/..
         - git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9 && cd aarch64-linux-android-4.9
         - git checkout 3b22ca783d1accb34446a5c9b5d84a8b37cb6543
-        - mv bin/921d9846-a815-11e9-84ea-ff8bce1b90b6 bin/aarch64-linux-android-gcc && mv bin/db96eedc-a815-11e9-a708-d79346614c9b bin/aarch64-linux-android-g++
+        - rm bin/aarch64-linux-android-gcc && rm bin/aarch64-linux-android-g++
+        - mv bin/921d9846-a815-11e9-84ea-ff8bce1b90b6-broken bin/aarch64-linux-android-gcc && mv bin/db96eedc-a815-11e9-a708-d79346614c9b-broken bin/aarch64-linux-android-g++
         - cd $TRAVIS_BUILD_DIR
       script:
         - make O=out/ merge_hi6250_defconfig
