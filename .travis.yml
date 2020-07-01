@@ -2,7 +2,7 @@ language: c
 compiler: gcc
 env:
   global:
-    - CROSS_COMPILE=$TRAVIS_BUILD_DIR/../aarch64-linux-android-4.9/aarch64-linux-android-
+    - CROSS_COMPILE=$TRAVIS_BUILD_DIR/aarch64-linux-android-4.9/bin/aarch64-linux-android-
     - ARCH=arm64
     - SUBARCH=arm64
 git:
@@ -26,15 +26,12 @@ jobs:
             - cmake
             - ninja
       before_script:
-        - cd $TRAVIS_BUILD_DIR/..
-        - ls
+        - cd $TRAVIS_BUILD_DIR
         - git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9 && cd aarch64-linux-android-4.9
         - git checkout 3b22ca783d1accb34446a5c9b5d84a8b37cb6543
         - mv bin/921d9846-a815-11e9-84ea-ff8bce1b90b6-broken bin/aarch64-linux-android-gcc && mv bin/db96eedc-a815-11e9-a708-d79346614c9b-broken bin/aarch64-linux-android-g++
-        - ls && ls bin/
-        - ls $TRAVIS_BUILD_DIR/../aarch64-linux-android-4.9/aarch64-linux-android-g*
-        - cd $TRAVIS_BUILD_DIR
       script:
+        - cd $TRAVIS_BUILD_DIR      
         - make O=out/ merge_hi6250_defconfig
         - make O=out/ -j8
         - make O=out/ modules
